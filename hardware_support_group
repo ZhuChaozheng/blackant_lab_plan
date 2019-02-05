@@ -1,2 +1,4 @@
 Develop RTOS applications for mobile_car group and dog group.
 Help other group get their demos into products.
+#姿态串口输出传感器设计
+邮票孔封装，首先实现核心功能（串口输出姿态角），再根据其他组需求设计下一步底板。
