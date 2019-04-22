@@ -1,0 +1,9 @@
+1. art_robot rf2o本身无问题，注意配置launch文件，具体参考art_robot上的。
+2. 注意下自己ros系统的环境变量，可以通过roscd rf2o_laser_odometry这类指令进行测试，
+   一般我们可以考虑使用source devel/setup.bash方式更改ros系统环境变量为当前的工作空间
+
+4.21
+  调试结果：成功高质量建图，rf2o无bug运行。
+  问题：车坐标系方向与实际行驶方向、车体标定方向不符。
+       调整坐标系之后，建图错乱（猜测yaw坐标系偏移）
+
