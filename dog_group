@@ -14,3 +14,33 @@
     4.实验室内部人员继续使用dell服务器作为测试机，上面允许开放所有端口部署各种测试开发环境
     5.每周人工备份生产环境（台式机）,日后研究如何备份打包部署环境脚本
     6.未来将采用阿里云等云计算服务替代dell测试机，用来保存重要数据
+
+
+人脸识别锁的架构设计：
+部署方式：
+1. 门外两边放置2个摄像头，监控走廊两边来往的人
+2. 门内外放置2个手动按钮，用于开门，其中门内出来，无需识别，直接手动按按钮开门，门外在异常时候可以手动开启；在系统都奔溃时候，采用断开实验室整体
+电源的方式，进行解锁
+
+详细设计：
+ubuntu层：
+1. 人脸识别系统通过管道进行通信
+```
+face_recognition --rtmp 2710 | nc {your server IP} 1993
+nc 1993 | serial_sound_server
+```
+serial_sound_server.c
+```
+argument = stdin();
+if (argument != NULL)
+   //sound_name(argument);
+   send_command_open();
+```
+单片机层：
+只有当门锁着，并且识别出来自己人才发出滴并开门，其他场景均没有任何反应
+*loop in main process*
+while(true) {
+    if (locked && open_command)
+        ring();
+        open_door();
+}
